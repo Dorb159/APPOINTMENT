@@ -72,17 +72,17 @@ public class Report {
         Scanner sc = new Scanner(System.in);
         config conf = new config();
         
-        // Fetch all doctors from the database
+        
         String qry = "SELECT d_id, d_fname, d_lname, d_email, d_status FROM tbl_doctor";
         String[] headers = {"Doctor ID", "First Name", "Last Name", "Email", "Status"};
         String[] columns = {"d_id", "d_fname", "d_lname", "d_email", "d_status"};
         System.out.println("=== DOCTOR REPORT ===");
         conf.viewRecords(qry, headers, columns);
         
-        // Prompt user to select a doctor to view their appointments
+        
         System.out.println("Enter Doctor ID to view appointments:");
         while (!sc.hasNextInt()) {
-            System.out.print("Invalid input! Please enter a valid Patient ID: ");
+            System.out.print("Invalid input! Please enter a valid Doctor ID: ");
             sc.next();
         }
         int doctorId = sc.nextInt();
@@ -93,14 +93,14 @@ public class Report {
         Scanner sc = new Scanner(System.in);
         config conf = new config();
         
-        // Fetch all patients from the database
+        
         String qry = "SELECT p_id, p_fname, p_lname, p_email, p_status FROM tbl_patient";
         String[] headers = {"Patient ID", "First Name", "Last Name", "Email", "Status"};
         String[] columns = {"p_id", "p_fname", "p_lname", "p_email", "p_status"};
         System.out.println("=== PATIENT REPORT ===");
         conf.viewRecords(qry, headers, columns);
         
-        // Prompt user to select a patient to view their doctor
+        
         System.out.println("Enter Patient ID to view assigned doctor:");
         while (!sc.hasNextInt()) {
             System.out.print("Invalid input! Please enter a valid Patient ID: ");
@@ -113,7 +113,7 @@ public class Report {
     private void viewAppointmentReport() {
         config conf = new config();
         
-        // Fetch all appointments from the database
+        
         String qry = "SELECT a_id, d_fname, p_fname, a_date, a_time, a_status FROM tbl_appointment "
                    + "LEFT JOIN tbl_doctor ON tbl_doctor.d_id = tbl_appointment.d_id "
                    + "LEFT JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id";
@@ -126,7 +126,7 @@ public class Report {
     private void viewAppointmentsForDoctor(int doctorId) {
         config conf = new config();
         
-        // Fetch appointments for the selected doctor
+        
         String qry = "SELECT a_id, p_fname, a_date, a_time, a_status FROM tbl_appointment "
                    + "LEFT JOIN tbl_patient ON tbl_patient.p_id = tbl_appointment.p_id "
                    + "WHERE tbl_appointment.d_id = ?";
@@ -139,7 +139,7 @@ public class Report {
     private void viewDoctorForPatient(int patientId) {
         config conf = new config();
         
-        // Fetch the doctor assigned to the selected patient
+        
         String qry = "SELECT d_fname, d_lname FROM tbl_doctor "
                    + "JOIN tbl_appointment ON tbl_doctor.d_id = tbl_appointment.d_id "
                    + "WHERE tbl_appointment.p_id = ?";
